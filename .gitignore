@@ -1,0 +1,27 @@
+# dependencies
+node_modules/
+
+# build output
+dist/
+.next/
+
+# database volume
+/psql
+/volume
+
+# env
+.env
+.env.local
+
+# Claude Code
+CLAUDE.md
+
+# IDE
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+
+# pnpm
+.pnpm-store/

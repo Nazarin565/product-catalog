@@ -1,0 +1,61 @@
+services:
+  products:
+    container_name: products
+    build:
+      context: .
+      dockerfile: apps/products/Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      PRODUCTS_PORT: 3000
+      DATABASE_HOST: psql
+      DATABASE_PORT: 5432
+      DATABASE_USER: postgres
+      DATABASE_PASSWORD: root
+      DATABASE_NAME: universe
+      AWS_REGION: us-east-1
+      AWS_ACCESS_KEY_ID: test
+      AWS_SECRET_ACCESS_KEY: test
+      AWS_SQS_ENDPOINT: http://localstack:4566
+      SQS_QUEUE_NAME: test-queue
+      WEB_URL: http://localhost:3002
+    depends_on:
+      - psql
+      - localstack
+    networks:
+      - universe
+
+  notifications:
+    container_name: notifications
+    build:
+      context: .
+      dockerfile: apps/notifications/Dockerfile
+    ports:
+      - "3001:3001"
+    environment:
+      NOTIFICATIONS_PORT: 3001
+      AWS_REGION: us-east-1
+      AWS_ACCESS_KEY_ID: test
+      AWS_SECRET_ACCESS_KEY: test
+      AWS_SQS_ENDPOINT: http://localstack:4566
+      SQS_QUEUE_NAME: test-queue
+    depends_on:
+      - localstack
+    networks:
+      - universe
+
+  web:
+    container_name: web
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+    ports:
+      - "3002:3002"
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:3000
+    networks:
+      - universe
+
+networks:
+  universe:
+    external: true

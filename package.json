@@ -1,0 +1,22 @@
+{
+  "name": "universe",
+  "version": "1.0.0",
+  "private": true,
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
+  },
+  "scripts": {
+    "dev": "pnpm --filter @universe/shared run build && pnpm --parallel --filter '!@universe/shared' --filter '!universe' run start:dev",
+    "build": "pnpm --filter @universe/shared run build && pnpm --recursive --filter '!@universe/shared' --filter '!universe' run build",
+    "lint": "pnpm --recursive run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,json,md}\""
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^7.0.0",
+    "@typescript-eslint/parser": "^7.0.0",
+    "eslint": "^8.57.0",
+    "prettier": "^3.3.0",
+    "typescript": "^5.4.0"
+  }
+}

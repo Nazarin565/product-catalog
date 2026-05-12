@@ -1,0 +1,13 @@
+{
+  "version": "6",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1778514354121,
+      "tag": "0000_material_smasher",
+      "breakpoints": true
+    }
+  ]
+}
